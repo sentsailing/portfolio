@@ -37,22 +37,42 @@ export function AboutSection() {
       {personalInfo.links.email && (
         <div className="mt-12 p-6 rounded-xl bg-bg-tertiary border border-border">
           <p className="text-fg-secondary">
-            Interested in working together or just want to say hello?
+            Interested in working together?
           </p>
-          <a
-            href={`mailto:${personalInfo.links.email}`}
-            className="inline-flex items-center gap-2 mt-3 text-accent hover:underline font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-            <span>Get in touch</span>
-          </a>
+          <div className="flex flex-wrap items-center gap-4 mt-3">
+            <a
+              href={`mailto:${personalInfo.links.email}`}
+              className="inline-flex items-center gap-2 text-accent hover:underline font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <span>Get in touch</span>
+            </a>
+            {personalInfo.links.calendly && (
+              <a
+                href={personalInfo.links.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-accent hover:underline font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Book a call</span>
+              </a>
+            )}
+          </div>
         </div>
       )}
     </section>

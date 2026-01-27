@@ -1,84 +1,68 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { navigation, motion as motionConfig, getSpacing } from "./config/site.config";
 import { useScrollSpy, usePrefersReducedMotion } from "./hooks";
 import { ProfilePanel } from "./components";
-import { AboutSection, ProjectsSection, BlogSection } from "./sections";
+import { AboutSection, ProjectsSection, ResearchSection, BlogSection } from "./sections";
 
 function App() {
   const sectionIds = navigation.sections.map((s) => s.id);
   const activeSection = useScrollSpy({ sectionIds, offset: 100 });
   const prefersReducedMotion = usePrefersReducedMotion();
   const spacing = getSpacing();
-  const rippleContainerRef = useRef<HTMLDivElement>(null);
-  const lastRippleTime = useRef(0);
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
-  const showRipple =
+  const showSpotlight =
     motionConfig.enabled &&
     motionConfig.effects.cursorGlow &&
     motionConfig.intensity > 0 &&
     !prefersReducedMotion;
 
-  // Create a ripple at cursor position
-  const createRipple = useCallback((x: number, y: number) => {
-    if (!rippleContainerRef.current || !showRipple) return;
-
-    const container = rippleContainerRef.current;
-    const intensity = motionConfig.intensity;
-
-    // Create multiple concentric rings
-    const ringCount = Math.min(3, intensity);
-
-    for (let i = 0; i < ringCount; i++) {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple-ring';
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      ripple.style.animationDelay = `${i * 80}ms`;
-      ripple.style.setProperty('--ring-index', i.toString());
-
-      container.appendChild(ripple);
-
-      // Remove after animation
-      ripple.addEventListener('animationend', () => {
-        ripple.remove();
-      });
-    }
-  }, [showRipple]);
-
   useEffect(() => {
-    if (!showRipple) return;
+    if (!showSpotlight || !spotlightRef.current) return;
 
-    const throttleMs = 120; // Limit ripple frequency
+    const spotlight = spotlightRef.current;
+    let animationId: number;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    // Smooth interpolation factor (lower = smoother/slower)
+    const smoothing = 0.12;
+
+    const animate = () => {
+      // Lerp toward target position
+      currentX += (targetX - currentX) * smoothing;
+      currentY += (targetY - currentY) * smoothing;
+
+      spotlight.style.setProperty('--spotlight-x', `${currentX}px`);
+      spotlight.style.setProperty('--spotlight-y', `${currentY}px`);
+
+      animationId = requestAnimationFrame(animate);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const now = Date.now();
-      if (now - lastRippleTime.current < throttleMs) return;
-      lastRippleTime.current = now;
-
-      createRipple(e.clientX, e.clientY);
+      targetX = e.clientX;
+      targetY = e.clientY;
     };
 
-    const handleClick = (e: MouseEvent) => {
-      // Always create ripple on click, bypass throttle
-      createRipple(e.clientX, e.clientY);
-    };
-
+    // Start animation loop
+    animationId = requestAnimationFrame(animate);
     document.addEventListener("mousemove", handleMouseMove, { passive: true });
-    document.addEventListener("click", handleClick, { passive: true });
 
     return () => {
+      cancelAnimationFrame(animationId);
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("click", handleClick);
     };
-  }, [showRipple, createRipple]);
+  }, [showSpotlight]);
 
   return (
     <div className="min-h-screen relative">
-      {/* Ripple container */}
-      {showRipple && (
+      {/* Cursor spotlight */}
+      {showSpotlight && (
         <div
-          ref={rippleContainerRef}
-          className="ripple-container"
+          ref={spotlightRef}
+          className="cursor-spotlight"
           aria-hidden="true"
         />
       )}
@@ -109,6 +93,7 @@ function App() {
             <div className="flex flex-col" style={{ gap: spacing.sectionGap }}>
               <AboutSection />
               <ProjectsSection />
+              <ResearchSection />
               <BlogSection />
             </div>
 

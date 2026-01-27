@@ -17,35 +17,33 @@
 
 export const personalInfo = {
   name: "David Y. Wang",
-  tagline: "Lifelong learner",
+  tagline: "Generalizing out of distribution",
 
   // Path to your photo - place your image in /public/images/
   // Recommended: 400x400px square image
   photo: "/images/profile.jpg",
 
   // Fallback initials if photo fails to load
-  initials: "DW",
+  initials: "DYW",
 
-  bio: `I'm a software engineer passionate about building elegant,
-performant web experiences. I combine strong engineering fundamentals
-with an eye for design to create products that are both technically
-solid and delightful to use.`,
+  bio: `Builder with a foundation in theoretical math research. I love using technology to optimize things and improve quality of life. Currently, I'm based in SF looking to join an startup where I can ship quickly, wear multiple hats, and learn more about how the world works.`,
 
   // Focus areas / interests displayed in About section
   interests: [
+    "Agentic Systems",
     "Full-stack Development",
-    "System Design",
-    "UI/UX Engineering",
-    "Open Source",
+    "Applied ML",
+    "Graph Algorithms",
   ],
 
   // Social links - set to null or remove to hide
   links: {
-    email: "hello@davidwang.dev",
-    github: "https://github.com/davidwang",
-    linkedin: "https://linkedin.com/in/davidwang",
+    email: "dyw.ventures@gmail.com",
+    github: "https://github.com/sentsailing",
+    linkedin: "https://linkedin.com/in/sentsailing",
     twitter: null, // Set to URL string to enable
     website: null, // Additional website link
+    calendly: "https://calendly.com/dyw-ventures/30min",
   },
 };
 
@@ -203,6 +201,44 @@ export const blogPosts: BlogPost[] = [
     category: "Engineering",
     tags: ["JavaScript", "Fundamentals", "Async"],
     slug: "understanding-event-loop",
+  },
+];
+
+// ============================================================================
+// RESEARCH
+// ============================================================================
+
+export interface Research {
+  id: string;
+  title: string;
+  problem: string; // Brief description of the problem
+  approach: string; // Brief description of the approach
+  tags: string[];
+  image?: string; // Path to research figure/diagram in /public/images/research/
+  links: {
+    paper?: string; // Link to PDF paper
+    blog?: string; // Link to blog deep-dive
+    code?: string; // Link to code repository
+  };
+  year: string; // Year of research
+  institution?: string; // Research institution/affiliation
+}
+
+export const research: Research[] = [
+  // Example research entry - replace with your actual research
+  {
+    id: "research-1",
+    title: "Example: Graph Neural Networks for Combinatorial Optimization",
+    problem: "Traditional algorithms for NP-hard combinatorial problems scale poorly. Can we leverage graph structure to learn better heuristics?",
+    approach: "Developed a message-passing neural network that learns to predict optimal solutions by exploiting problem symmetries and local graph structure.",
+    tags: ["Graph Theory", "Machine Learning", "Optimization"],
+    image: "/images/research/gnn-example.png",
+    links: {
+      paper: "/papers/example-paper.pdf",
+      blog: "#research-1-blog",
+    },
+    year: "2024",
+    institution: "University",
   },
 ];
 
@@ -478,6 +514,7 @@ export const navigation = {
   sections: [
     { id: "about", label: "About" },
     { id: "projects", label: "Projects" },
+    { id: "research", label: "Research" },
     { id: "blog", label: "Blog" },
   ],
 };
