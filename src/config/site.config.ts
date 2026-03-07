@@ -147,7 +147,6 @@ export interface BlogPost {
   tags: string[];
   slug: string; // URL-friendly identifier
   featured?: boolean;
-  // For future MDX integration, add: content?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -211,21 +210,20 @@ export const blogPosts: BlogPost[] = [
 export interface Research {
   id: string;
   title: string;
-  problem: string; // Brief description of the problem
-  approach: string; // Brief description of the approach
+  problem: string;
+  approach: string;
   tags: string[];
-  image?: string; // Path to research figure/diagram in /public/images/research/
+  image?: string;
   links: {
-    paper?: string; // Link to PDF paper
-    blog?: string; // Link to blog deep-dive
-    code?: string; // Link to code repository
+    paper?: string;
+    blog?: string;
+    code?: string;
   };
-  year: string; // Year of research
-  institution?: string; // Research institution/affiliation
+  year: string;
+  institution?: string;
 }
 
 export const research: Research[] = [
-  // Example research entry - replace with your actual research
   {
     id: "research-1",
     title: "Example: Graph Neural Networks for Combinatorial Optimization",
@@ -247,84 +245,65 @@ export const research: Research[] = [
 // ============================================================================
 
 export const theme = {
-  // Color mode: 'light' | 'dark'
-  // The site respects this setting for initial load
   mode: "light" as const,
 
   colors: {
-    // Light mode palette - Cream & Regal Red
     light: {
-      // Backgrounds
-      bg: "#faf8f3",
-      bgSecondary: "#fffdf8",
-      bgTertiary: "#f5f0e6",
+      bg: "#ffffff",
+      bgSecondary: "#fafafa",
+      bgTertiary: "#f2f2f2",
 
-      // Foregrounds
-      fg: "#1a1a1a",
-      fgSecondary: "#3d3d3d",
-      fgMuted: "#6b6b6b",
+      fg: "#0a0a0a",
+      fgSecondary: "#333333",
+      fgMuted: "#666666",
 
-      // Accent colors - Regal Red
-      accent: "#8b1538",
-      accentHover: "#6d1029",
-      accentMuted: "#a62048",
+      accent: "#e30613",
+      accentHover: "#c00511",
+      accentMuted: "#e3061380",
 
-      // Borders and dividers
-      border: "#e8e2d6",
-      borderHover: "#d4cdc0",
+      border: "#d4d4d4",
+      borderHover: "#a3a3a3",
 
-      // Interactive states
-      hoverBg: "#f5f0e6",
-      activeBg: "#ebe4d6",
+      hoverBg: "#f2f2f2",
+      activeBg: "#e5e5e5",
 
-      // Special
-      cardBg: "#fffdf8",
-      cardBorder: "#e8e2d6",
-      cardShadow: "0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08)",
+      cardBg: "#ffffff",
+      cardBorder: "#d4d4d4",
+      cardShadow: "none",
 
-      // Gradient for cursor glow (if enabled)
-      glowGradient: "radial-gradient(600px circle, rgba(139, 21, 56, 0.08), transparent 40%)",
+      glowGradient: "none",
     },
 
-    // Dark mode palette (for future dark mode toggle)
     dark: {
-      bg: "#0f0d0b",
-      bgSecondary: "#1a1816",
-      bgTertiary: "#252220",
+      bg: "#0a0a0a",
+      bgSecondary: "#141414",
+      bgTertiary: "#1f1f1f",
 
-      fg: "#faf8f3",
-      fgSecondary: "#d4d0c8",
-      fgMuted: "#a19d95",
+      fg: "#fafafa",
+      fgSecondary: "#d4d4d4",
+      fgMuted: "#a3a3a3",
 
-      accent: "#c4324f",
-      accentHover: "#d4526b",
-      accentMuted: "#a62048",
+      accent: "#e30613",
+      accentHover: "#ff2d3b",
+      accentMuted: "#e3061380",
 
-      border: "#2d2a27",
-      borderHover: "#3d3936",
+      border: "#2d2d2d",
+      borderHover: "#404040",
 
-      hoverBg: "#252220",
-      activeBg: "#2d2a27",
+      hoverBg: "#1f1f1f",
+      activeBg: "#2d2d2d",
 
-      cardBg: "#1a1816",
-      cardBorder: "#2d2a27",
-      cardShadow: "0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3)",
+      cardBg: "#141414",
+      cardBorder: "#2d2d2d",
+      cardShadow: "none",
 
-      glowGradient: "radial-gradient(600px circle, rgba(196, 50, 79, 0.1), transparent 40%)",
+      glowGradient: "none",
     },
   },
 
-  // Tag colors for categorization - warm tones with red accents
+  // Unified grey tags — no per-category colors
   tagColors: {
-    default: { bg: "#f5f0e6", text: "#4a4a4a" },
-    react: { bg: "#fde8ec", text: "#8b1538" },
-    typescript: { bg: "#e8f0f8", text: "#1e4a7a" },
-    python: { bg: "#fef6e6", text: "#8a5a00" },
-    rust: { bg: "#fde8ec", text: "#8b1538" },
-    go: { bg: "#e8f5ed", text: "#1a5f3a" },
-    engineering: { bg: "#f5eef8", text: "#5a2a7a" },
-    opinion: { bg: "#fde8ec", text: "#8b1538" },
-    productivity: { bg: "#e8f5ed", text: "#1a5f3a" },
+    default: { bg: "#f2f2f2", text: "#666666" },
   },
 };
 
@@ -333,28 +312,25 @@ export const theme = {
 // ============================================================================
 
 export const typography = {
-  // Font families - uses system fonts by default for performance
-  // To use custom fonts, update these and add @font-face in index.css
+  // Single font family — Akzidenz-Grotesk (Albert Sans interim)
   fontFamily: {
-    sans: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
+    sans: '"Akzidenz-Grotesk", "Albert Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+    serif: '"Akzidenz-Grotesk", "Albert Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
     mono: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
   },
 
-  // Font sizes (rem values)
+  // Perfect Fourth (1.333) type scale
   fontSize: {
-    xs: "0.75rem",    // 12px
-    sm: "0.875rem",   // 14px
-    base: "1rem",     // 16px
-    lg: "1.125rem",   // 18px
-    xl: "1.25rem",    // 20px
-    "2xl": "1.5rem",  // 24px
-    "3xl": "1.875rem", // 30px
-    "4xl": "2.25rem", // 36px
-    "5xl": "3rem",    // 48px
+    xs: "0.75rem",     // 12px
+    sm: "0.875rem",    // 14px
+    base: "1rem",      // 16px
+    lg: "1.125rem",    // 18px
+    xl: "1.313rem",    // 21px
+    "2xl": "1.75rem",  // 28px
+    "3xl": "2.375rem", // 38px
+    "4xl": "3.125rem", // 50px
   },
 
-  // Font weights
   fontWeight: {
     normal: "400",
     medium: "500",
@@ -362,7 +338,6 @@ export const typography = {
     bold: "700",
   },
 
-  // Line heights
   lineHeight: {
     tight: "1.25",
     normal: "1.5",
@@ -375,38 +350,26 @@ export const typography = {
 // ============================================================================
 
 export const layout = {
-  // Layout density: 'airy' | 'compact'
+  maxWidth: "1120px",
+  contentWidth: "66.667%",
+  sidebarWidth: "25%",
+  sidebarMaxWidth: "280px",
+
   density: "airy" as const,
 
-  // Max width of main content area
-  maxWidth: "1280px",
-
-  // Column widths (desktop)
-  contentWidth: "65%",
-  sidebarWidth: "35%",
-
-  // Sidebar max width (prevents it from getting too wide on large screens)
-  sidebarMaxWidth: "320px",
-
-  // Spacing values based on density
   spacing: {
     airy: {
-      sectionGap: "6rem",      // Gap between sections
-      cardGap: "1.5rem",       // Gap between cards
-      cardPadding: "1.5rem",   // Padding inside cards
-      sectionPadding: "3rem",  // Horizontal padding
-      contentGap: "1rem",      // Gap between content elements
+      sectionGap: "5rem",
+      cardGap: "1.5rem",
+      itemGap: "0.75rem",
     },
     compact: {
       sectionGap: "3rem",
       cardGap: "1rem",
-      cardPadding: "1rem",
-      sectionPadding: "1.5rem",
-      contentGap: "0.75rem",
+      itemGap: "0.5rem",
     },
   },
 
-  // Breakpoints
   breakpoints: {
     sm: "640px",
     md: "768px",
@@ -420,40 +383,34 @@ export const layout = {
 // ============================================================================
 
 export const components = {
-  // Border radius
   borderRadius: {
-    sm: "0.25rem",   // 4px
-    md: "0.5rem",    // 8px
-    lg: "0.75rem",   // 12px
-    xl: "1rem",      // 16px
-    full: "9999px",  // Circular
+    sm: "0",
+    md: "0",
+    lg: "0",
+    xl: "0",
+    full: "0",
   },
 
-  // Card styles
   card: {
-    // Default card appearance
     default: {
       borderWidth: "1px",
-      shadow: "sm", // 'none' | 'sm' | 'md' | 'lg'
+      shadow: "none" as const,
     },
-    // Featured card appearance (for featured projects/posts)
     featured: {
       borderWidth: "1px",
-      shadow: "md",
+      shadow: "none" as const,
     },
   },
 
-  // Button styles
   button: {
-    borderRadius: "md", // Key from borderRadius above
+    borderRadius: "0",
     padding: "0.5rem 1rem",
   },
 
-  // Photo styling
   photo: {
-    size: "120px",
-    borderWidth: "3px",
-    borderColor: "border", // Key from theme.colors
+    size: "96px",
+    borderWidth: "0px",
+    borderColor: "border",
   },
 };
 
@@ -462,47 +419,28 @@ export const components = {
 // ============================================================================
 
 export const motion = {
-  // Master toggle - set to false to disable ALL motion
   enabled: true,
 
-  // Motion intensity scale (0-3)
-  // 0 = No motion (respects prefers-reduced-motion)
-  // 1 = Subtle (minimal, professional)
-  // 2 = Moderate (noticeable but not distracting)
-  // 3 = Expressive (more dramatic effects)
-  intensity: 2,
+  intensity: 1,
 
-  // Individual effect toggles
   effects: {
-    // Cursor glow/gradient that follows mouse
-    cursorGlow: true,
-
-    // Magnetic effect on interactive elements
-    magneticHover: true,
-
-    // Parallax tilt on project cards
-    parallaxTilt: true,
-
-    // Smooth scroll behavior
+    cursorGlow: false,
+    magneticHover: false,
+    parallaxTilt: false,
     smoothScroll: true,
-
-    // Fade-in animations on scroll
-    scrollReveal: true,
+    scrollReveal: false,
   },
 
-  // Duration values (in ms)
   duration: {
-    fast: 150,
-    normal: 300,
-    slow: 500,
+    fast: 100,
+    normal: 200,
+    slow: 300,
   },
 
-  // Easing functions
   easing: {
     default: "cubic-bezier(0.4, 0, 0.2, 1)",
     easeOut: "cubic-bezier(0, 0, 0.2, 1)",
     easeIn: "cubic-bezier(0.4, 0, 1, 1)",
-    spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
   },
 };
 

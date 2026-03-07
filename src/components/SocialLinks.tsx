@@ -1,5 +1,4 @@
 import { personalInfo } from "../config/site.config";
-import { useMagneticHover } from "../hooks/useMagneticHover";
 
 interface SocialLinksProps {
   className?: string;
@@ -12,15 +11,12 @@ interface SocialLinkProps {
 }
 
 function SocialLink({ href, label, icon }: SocialLinkProps) {
-  const magneticRef = useMagneticHover<HTMLAnchorElement>({ strength: 8 });
-
   return (
     <a
-      ref={magneticRef}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="p-2 rounded-lg text-fg-muted hover:text-fg hover:bg-hover-bg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="p-2 text-accent hover:text-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-fg"
       aria-label={label}
     >
       {icon}

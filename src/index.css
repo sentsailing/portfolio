@@ -1,67 +1,66 @@
 @import "tailwindcss";
 
 /*
- * Theme CSS Variables
+ * Theme CSS Variables — Swiss/International Typographic Style
  *
- * These variables are sourced from site.config.ts and power the entire theme.
- * Tailwind CSS v4 uses these via the @theme directive below.
- *
- * To change colors: Edit the theme.colors section in site.config.ts
- * For quick palette swaps, the CSS variables below can also be edited directly.
+ * Grid system based on Müller-Brockmann's principles:
+ * - 24px baseline unit (16px body × 1.5 line-height)
+ * - Perfect Fourth (1.333) type scale
+ * - High-contrast palette: white, near-black, Swiss red accent
+ * - All spacing multiples of the baseline unit
  */
 
 @theme {
-  /* Colors - Cream & Regal Red */
-  --color-bg: #faf8f3;
-  --color-bg-secondary: #fffdf8;
-  --color-bg-tertiary: #f5f0e6;
+  /* Colors — High contrast, minimal palette */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #fafafa;
+  --color-bg-tertiary: #f2f2f2;
 
-  --color-fg: #1a1a1a;
-  --color-fg-secondary: #3d3d3d;
-  --color-fg-muted: #6b6b6b;
+  --color-fg: #0a0a0a;
+  --color-fg-secondary: #333333;
+  --color-fg-muted: #666666;
 
-  --color-accent: #8b1538;
-  --color-accent-hover: #6d1029;
-  --color-accent-muted: #a62048;
+  --color-accent: #e30613;
+  --color-accent-hover: #c00511;
+  --color-accent-muted: #e3061380;
 
-  --color-border: #e8e2d6;
-  --color-border-hover: #d4cdc0;
+  --color-border: #d4d4d4;
+  --color-border-hover: #a3a3a3;
 
-  --color-hover-bg: #f5f0e6;
-  --color-active-bg: #ebe4d6;
+  --color-hover-bg: #f2f2f2;
+  --color-active-bg: #e5e5e5;
 
-  --color-card-bg: #fffdf8;
-  --color-card-border: #e8e2d6;
+  --color-card-bg: #ffffff;
+  --color-card-border: #d4d4d4;
 
-  /* Typography */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  /* Typography — Akzidenz-Grotesk (Albert Sans interim) */
+  --font-sans: "Akzidenz-Grotesk", "Albert Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --font-serif: "Akzidenz-Grotesk", "Albert Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     monospace;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  /* Shadows — none (use borders/rules for separation) */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
 
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-full: 9999px;
+  /* Border Radius — 0 (sharp geometric forms) */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-full: 0;
 
-  /* Transitions */
+  /* Transitions — minimal, functional */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --duration-fast: 150ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
 }
 
 /* Base styles */
@@ -87,7 +86,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-fg);
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
@@ -95,72 +94,125 @@ body {
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-fg);
   outline-offset: 2px;
 }
 
 /* Selection styles */
 ::selection {
   background-color: var(--color-accent);
-  color: white;
+  color: var(--color-bg);
 }
 
 /* Scrollbar styles (webkit) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
 }
 
-/* Cursor Spotlight Effect
- * Soft, diffused glow that follows the cursor
- */
-.cursor-spotlight {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Rule utility — horizontal separator */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 0;
+}
+
+/* Image Cube — 3D rotating cube with profile photo on all faces */
+.image-cube-wrapper {
+  perspective: 400px;
+  position: relative;
+}
+
+/* Ground shadow beneath the cube */
+.image-cube-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 14px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18) 0%, transparent 70%);
+  animation: cube-shadow 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cube-shadow {
+  0%       { width: 70%; opacity: 0.9; }
+  15%      { width: 50%; opacity: 0.6; }
+  30%      { width: 70%; opacity: 0.9; }
+  45%      { width: 55%; opacity: 0.65; }
+  60%      { width: 70%; opacity: 0.9; }
+  75%      { width: 50%; opacity: 0.6; }
+  85%      { width: 55%; opacity: 0.65; }
+  100%     { width: 70%; opacity: 0.9; }
+}
+
+.image-cube {
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cube-spin 12s ease-in-out infinite;
 }
 
-.cursor-spotlight::before {
-  content: '';
+.image-cube-face {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  left: var(--spotlight-x, -300px);
-  top: var(--spotlight-y, -300px);
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle at center,
-    rgba(139, 21, 56, 0.08) 0%,
-    rgba(139, 21, 56, 0.05) 25%,
-    rgba(139, 21, 56, 0.02) 50%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  will-change: left, top;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 3px solid var(--color-fg);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cursor-spotlight {
-    display: none;
-  }
+.image-cube-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Lighting overlay — brighter when facing camera, darker when angled away */
+.image-cube-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.image-cube-face--front  { transform: translateZ(48px); }
+.image-cube-face--back   { transform: rotateY(180deg) translateZ(48px); }
+.image-cube-face--right  { transform: rotateY(90deg) translateZ(48px); }
+.image-cube-face--left   { transform: rotateY(-90deg) translateZ(48px); }
+.image-cube-face--top    { transform: rotateX(90deg) translateZ(48px); }
+.image-cube-face--bottom { transform: rotateX(-90deg) translateZ(48px); }
+
+@keyframes cube-spin {
+  0%       { transform: rotateX(-15deg) rotateY(15deg); }
+  15%      { transform: rotateX(-75deg) rotateY(60deg); }
+  30%      { transform: rotateX(-15deg) rotateY(105deg); }
+  45%      { transform: rotateX(70deg) rotateY(170deg); }
+  60%      { transform: rotateX(15deg) rotateY(195deg); }
+  75%      { transform: rotateX(-65deg) rotateY(250deg); }
+  85%      { transform: rotateX(60deg) rotateY(320deg); }
+  100%     { transform: rotateX(-15deg) rotateY(375deg); }
 }
 
 /* Line clamp utility */
@@ -176,32 +228,4 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* Smooth image loading */
-img {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-img[src=""] {
-  opacity: 0;
-}
-
-/* Card hover animations */
-.card-hover {
-  transition:
-    transform 0.3s var(--ease-out),
-    box-shadow 0.3s var(--ease-out);
-}
-
-.card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card-hover:hover {
-    transform: none;
-  }
 }

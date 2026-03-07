@@ -7,10 +7,13 @@ export function BlogSection() {
 
   return (
     <section id="blog" className="scroll-mt-24">
-      {/* Section header */}
       <header className="mb-8">
-        <h2 className="text-3xl font-bold text-fg">Blog</h2>
-        <div className="w-12 h-1 bg-accent rounded-full mt-3" />
+        <h2 className="text-3xl font-bold text-fg flex items-center gap-3">
+          <svg className="w-7 h-7 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          Blog
+        </h2>
         <p className="text-fg-muted mt-4">
           Thoughts on software engineering, design, and technology.
         </p>
@@ -23,25 +26,22 @@ export function BlogSection() {
         </div>
       )}
 
-      {/* Other posts list */}
+      {/* Other posts */}
       {otherPosts.length > 0 && (
         <>
           {featuredPost && (
-            <h3 className="text-sm font-semibold text-fg-muted uppercase tracking-wider mb-4 mt-12">
+            <h3 className="text-xs font-semibold text-fg-muted uppercase tracking-wider mb-4 mt-12">
               All Posts
             </h3>
           )}
-          <div className="divide-y divide-border">
+          <div>
             {otherPosts.map((post) => (
-              <div key={post.id} className="py-2 first:pt-0 last:pb-0">
-                <BlogPostItem post={post} variant="list" />
-              </div>
+              <BlogPostItem key={post.id} post={post} variant="list" />
             ))}
           </div>
         </>
       )}
 
-      {/* View all posts CTA (for future expansion) */}
       <div className="mt-8 pt-6 border-t border-border">
         <p className="text-sm text-fg-muted">
           More posts coming soon. Stay tuned!
