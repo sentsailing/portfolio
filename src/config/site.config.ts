@@ -26,8 +26,6 @@ export const personalInfo = {
   // Fallback initials if photo fails to load
   initials: "DYW",
 
-  bio: `Builder with a foundation in theoretical math research. I love using technology to optimize things and improve quality of life. Currently, I'm based in SF looking to join an startup where I can ship quickly, wear multiple hats, and learn more about how the world works.`,
-
   // Focus areas / interests displayed in About section
   interests: [
     "Agentic Systems",
@@ -68,68 +66,50 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "project-alpha",
-    title: "Project Alpha",
-    pitch: "A next-gen developer toolkit for rapid prototyping",
-    description: "Built a comprehensive developer toolkit that streamlines the prototyping process. Features include real-time collaboration, component library integration, and automated deployment pipelines.",
-    tags: ["React", "TypeScript", "Node.js", "WebSocket"],
+    id: "glicko",
+    title: "GLICKGLICK",
+    pitch: "Adaptive practice problems using the Glicko-2 rating system. This rates both players and problems so difficulty quickly converges to your true skill level.",
+    tags: ["Next.js", "PostgreSQL", "Prisma", "TypeScript"],
     links: {
-      live: "https://project-alpha.dev",
-      github: "https://github.com/davidwang/project-alpha",
+      live: "https://glickglick.com",
     },
-    image: "/images/projects/alpha.png",
     featured: true,
   },
   {
-    id: "data-viz",
-    title: "DataViz Studio",
-    pitch: "Interactive data visualization platform for analysts",
-    description: "An intuitive platform for creating stunning data visualizations without code. Supports real-time data streams and custom chart builders.",
-    tags: ["D3.js", "Python", "PostgreSQL", "AWS"],
+    id: "robomixer",
+    title: "Robomixer",
+    pitch: "AI-powered mixing engine that analyzes audio features to stitch songs. Features: beat detection, key detection, source separation, and harmonic mixing via the Camelot wheel.",
+    tags: ["PyTorch", "FastAPI", "librosa"],
     links: {
-      live: "https://dataviz.studio",
-      github: "https://github.com/davidwang/dataviz",
+      github: "https://github.com/sentsailing/robomixer",
     },
-    image: "/images/projects/dataviz.png",
     featured: true,
   },
   {
-    id: "cli-tools",
-    title: "DevCLI",
-    pitch: "Collection of productivity CLI tools for developers",
-    tags: ["Rust", "CLI", "Open Source"],
+    id: "natural-poker",
+    title: "Natural Poker",
+    pitch: "Voice based 6-max no-limit hold'em. Play hands and review them with a voice agent using TTS/STT.",
+    tags: ["TTS", "STT", "Voice AI"],
     links: {
-      github: "https://github.com/davidwang/devcli",
+      github: "https://github.com/sentsailing/natural-poker",
+    },
+    featured: true,
+  },
+  {
+    id: "bastion",
+    title: "Bastion",
+    pitch: "Airtight content filter hardening with time-delayed cryptographic puzzles for unlocking.",
+    tags: ["Rust"],
+    links: {
+      github: "https://github.com/sentsailing/bastion",
     },
   },
   {
-    id: "design-system",
-    title: "Horizon UI",
-    pitch: "Accessible component library with dark mode support",
-    tags: ["React", "Storybook", "A11y"],
-    links: {
-      live: "https://horizon-ui.dev",
-      github: "https://github.com/davidwang/horizon-ui",
-    },
-  },
-  {
-    id: "ml-pipeline",
-    title: "MLPipe",
-    pitch: "Simplified ML pipeline orchestration for small teams",
-    tags: ["Python", "Docker", "Kubernetes"],
-    links: {
-      github: "https://github.com/davidwang/mlpipe",
-      article: "https://blog.davidwang.dev/mlpipe-deep-dive",
-    },
-  },
-  {
-    id: "api-gateway",
-    title: "Gateway Pro",
-    pitch: "Lightweight API gateway with built-in rate limiting",
-    tags: ["Go", "Redis", "gRPC"],
-    links: {
-      github: "https://github.com/davidwang/gateway-pro",
-    },
+    id: "leadbase",
+    title: "Leadbase",
+    pitch: "Lead management and CRM dashboard with analytics.",
+    tags: ["Next.js", "React", "SQLite", "TypeScript"],
+    links: {},
   },
 ];
 
@@ -225,18 +205,26 @@ export interface Research {
 
 export const research: Research[] = [
   {
-    id: "research-1",
-    title: "Example: Graph Neural Networks for Combinatorial Optimization",
-    problem: "Traditional algorithms for NP-hard combinatorial problems scale poorly. Can we leverage graph structure to learn better heuristics?",
-    approach: "Developed a message-passing neural network that learns to predict optimal solutions by exploiting problem symmetries and local graph structure.",
-    tags: ["Graph Theory", "Machine Learning", "Optimization"],
-    image: "/images/research/gnn-example.png",
+    id: "visibility-graphs",
+    title: "On General Visibility Graph Recognition",
+    problem: "Given a graph G in adjacency matrix form, determine whether G is the visibility graph of a simple polygon or polytope. These are central open problems in computational geometry (first proposed by Ghosh & Goswami).",
+    approach: "Proposed an iterative poset construction that builds classes of graphs inductively from the base case of Vis(3).",
+    tags: ["Graph Theory", "Computational Geometry", "Combinatorics"],
     links: {
-      paper: "/papers/example-paper.pdf",
-      blog: "#research-1-blog",
+      paper: "/docs/dimacs_reu_slides_dyw.pdf",
     },
-    year: "2024",
-    institution: "University",
+    year: "2023",
+    institution: "DIMACS REU (Rutgers University)",
+  },
+  {
+    id: "cross-layer-transcoders",
+    title: "Mapping Reasoning Circuits with Cross-Layer Transcoders",
+    problem: "Language models compose features across layers to perform multi-step reasoning, but the intermediate computations are opaque. Is it possible to trace how associations chain together across multiple layers?",
+    approach: "Applied cross-layer transcoders to decompose MLP activations into interpretable feature circuits spanning multiple layers. Identified causally relevant pathways that mediate multi-hop factual recall (e.g., 'The capital of the country that invented X is...').",
+    tags: ["Mechanistic Interpretability", "Sparse Autoencoders", "NLP"],
+    links: {},
+    year: "2025",
+    institution: "UNC Chapel Hill, advised by Prof. Shashank Srivastava",
   },
 ];
 
@@ -451,9 +439,8 @@ export const motion = {
 export const navigation = {
   sections: [
     { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
+    { id: "projects", label: "Creations" },
     { id: "research", label: "Research" },
-    { id: "blog", label: "Blog" },
   ],
 };
 
