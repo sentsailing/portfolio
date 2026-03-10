@@ -50,22 +50,11 @@ export function ProfilePanel({ activeSection }: ProfilePanelProps) {
               <p className="text-sm text-fg-muted mt-1">{personalInfo.tagline}</p>
             </div>
 
-            {/* Contact links — side by side */}
+            {/* Contact links */}
             <div className="flex items-center justify-center gap-4 w-full">
-              {personalInfo.links.email && (
-                <a
-                  href={`mailto:${personalInfo.links.email}`}
-                  className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-fg"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Email me
-                </a>
-              )}
               {personalInfo.links.calendly && (
                 <a
-                  href={personalInfo.links.calendly}
+                  href="https://calendar.app.google/en8PfCXmSt5NdmQo7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-fg"

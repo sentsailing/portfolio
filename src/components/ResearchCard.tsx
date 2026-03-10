@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Research, theme } from "../config/site.config";
+import { Research } from "../config/site.config";
 
 interface ResearchCardProps {
   research: Research;
@@ -9,18 +9,18 @@ export function ResearchCard({ research }: ResearchCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <article className="border-t border-border pt-6">
+    <article>
+      <h3 className="text-2xl font-bold text-fg leading-tight">
+        {research.title}
+      </h3>
+
       {/* Year & Institution */}
-      <div className="flex items-center gap-3 mb-2">
+      <div className="flex items-center gap-3 mt-1">
         <span className="text-xs text-fg-muted">{research.year}</span>
         {research.institution && (
           <span className="text-xs text-fg-muted">{research.institution}</span>
         )}
       </div>
-
-      <h3 className="text-xl font-bold text-fg leading-tight">
-        {research.title}
-      </h3>
 
       {/* Image */}
       {research.image && !imageError && (
@@ -54,29 +54,13 @@ export function ResearchCard({ research }: ResearchCardProps) {
         </div>
       </div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4">
-        {research.tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center px-2 py-0.5 text-xs font-medium"
-            style={{
-              backgroundColor: theme.tagColors.default.bg,
-              color: theme.tagColors.default.text,
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
       {/* Links */}
-      <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
+      <div className="flex items-center gap-4 mt-2">
         {research.links.blog && (
           <ResearchLink href={research.links.blog} label="Deep Dive" />
         )}
         {research.links.paper && (
-          <ResearchLink href={research.links.paper} label="Read Paper" />
+          <ResearchLink href={research.links.paper} label="Slides" />
         )}
         {research.links.code && (
           <ResearchLink href={research.links.code} label="View Code" />

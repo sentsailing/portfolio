@@ -1,17 +1,15 @@
-import { navigation, getSpacing } from "./config/site.config";
+import { navigation } from "./config/site.config";
 import { useScrollSpy } from "./hooks";
 import { ProfilePanel } from "./components";
 import {
   AboutSection,
   ProjectsSection,
   ResearchSection,
-  BlogSection,
 } from "./sections";
 
 function App() {
   const sectionIds = navigation.sections.map((s) => s.id);
   const activeSection = useScrollSpy({ sectionIds, offset: 100 });
-  const spacing = getSpacing();
 
   return (
     <div className="min-h-screen">
@@ -34,18 +32,14 @@ function App() {
 
           {/* Main content */}
           <main className="lg:col-span-9 lg:order-1">
-            <div
-              className="flex flex-col"
-              style={{ gap: spacing.sectionGap }}
-            >
+            <div className="flex flex-col gap-32">
               <AboutSection />
               <ProjectsSection />
               <ResearchSection />
-              <BlogSection />
             </div>
 
             <footer className="mt-24 pt-6 border-t border-border text-sm text-fg-muted">
-              <p>Built with React & Tailwind CSS</p>
+              <p>Built with 🇨🇭 in mind</p>
             </footer>
           </main>
         </div>

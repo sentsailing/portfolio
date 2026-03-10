@@ -11,11 +11,12 @@ interface SocialLinkProps {
 }
 
 function SocialLink({ href, label, icon }: SocialLinkProps) {
+  const isExternal = !href.startsWith("mailto:");
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="p-2 text-accent hover:text-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-fg"
       aria-label={label}
     >
