@@ -114,7 +114,6 @@ function About({ go }) {
           {c.linkedin && <a className="btn" href={c.linkedin} target="_blank" rel="noopener"><Icon.linkedin /> LinkedIn</a>}
           {c.github && <a className="btn" href={c.github} target="_blank" rel="noopener"><Icon.github /> GitHub</a>}
           {c.twitter && <a className="btn" href={c.twitter} target="_blank" rel="noopener"><Icon.twitter /> X</a>}
-          {S.resumeFile && <a className="btn" href={S.resumeFile} download><Icon.download /> Résumé</a>}
         </div>
       </section>
     </div>);
