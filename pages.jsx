@@ -21,6 +21,52 @@ function fmtDate(iso) {
   catch (e) {return iso;}
 }
 
+/* ---- Markdown posts ----------------------------------------------------- *
+ * Long writeups live as writing/<slug>/index.md (+ images/). The parser and
+ * the file are fetched ONLY when a reader opens a markdown post, so the rest
+ * of the site never pays for them. Parsed HTML is cached per slug.          */
+const MD_PARSER_SRC = "https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js";
+let _markedPromise = null;
+function ensureMarked() {
+  if (window.marked) return Promise.resolve(window.marked);
+  if (_markedPromise) return _markedPromise;
+  _markedPromise = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = MD_PARSER_SRC;s.async = true;
+    s.onload = () => resolve(window.marked);
+    s.onerror = () => {_markedPromise = null;reject(new Error("markdown parser failed to load"));};
+    document.head.appendChild(s);
+  });
+  return _markedPromise;
+}
+function stripFrontmatter(md) {
+  if (md.slice(0, 3) === "---") {
+    const end = md.indexOf("\n---", 3);
+    if (end !== -1) {const nl = md.indexOf("\n", end + 1);return nl === -1 ? "" : md.slice(nl + 1);}
+  }
+  return md;
+}
+const _postCache = {};
+function loadMarkdownPost(slug) {
+  if (_postCache[slug]) return Promise.resolve(_postCache[slug]);
+  const base = "writing/" + slug + "/";
+  return Promise.all([
+  ensureMarked(),
+  fetch(base + "index.md").then((r) => {if (!r.ok) throw new Error("post not found");return r.text();})]).
+  then(([marked, raw]) => {
+    // rewrite relative image paths (images/foo.png) to the post's own folder
+    const body = stripFrontmatter(raw).replace(/\]\(images\//g, "](" + base + "images/");
+    const parse = marked.parse || marked;
+    const html = parse(body).
+    // defer offscreen charts so they don't block the reading experience
+    replace(/<img /g, '<img loading="lazy" decoding="async" ').
+    // wrap tables so wide ones scroll instead of breaking the layout
+    replace(/<table>/g, '<div class="md-table"><table>').replace(/<\/table>/g, "</table></div>");
+    _postCache[slug] = html;
+    return html;
+  });
+}
+
 /* hook: reveal children on scroll — with a guaranteed fallback so content
    ALWAYS becomes visible even if IntersectionObserver/rAF is throttled. */
 function useReveals(dep) {
@@ -105,8 +151,22 @@ function Writing({ go }) {
 function Reading({ slug, go }) {
   const S = window.SITE;
   const w = S.writing.find((x) => x.slug === slug);
+  const [mdHtml, setMdHtml] = useState("");
+  const [mdState, setMdState] = useState("idle"); // idle | loading | ready | error
   useReveals("read-" + slug);
   useEffect(() => {window.scrollTo(0, 0);}, [slug]);
+
+  // markdown-backed posts: fetch + render lazily
+  useEffect(() => {
+    if (!w || !w.md) return;
+    let cancelled = false;
+    setMdState("loading");setMdHtml("");
+    loadMarkdownPost(w.slug).
+    then((html) => {if (!cancelled) {setMdHtml(html);setMdState("ready");}}).
+    catch(() => {if (!cancelled) setMdState("error");});
+    return () => {cancelled = true;};
+  }, [slug]);
+
   if (!w) {
     return (
       <div className="page page-anim reading">
@@ -121,9 +181,16 @@ function Reading({ slug, go }) {
       <a className="back" href="#/writing" onClick={(e) => {e.preventDefault();go("writing");}}>← Writing</a>
       <div className="reading-meta reveal"><span>{fmtDate(w.date)}</span><span>{w.readingTime}</span></div>
       <h1 className="reveal">{w.title}</h1>
+      {w.md ?
+      mdState === "ready" ?
+      <div className="reading-body md" dangerouslySetInnerHTML={{ __html: mdHtml }} /> :
+      mdState === "error" ?
+      <div className="reading-body"><p>Couldn’t load this piece. <a className="link" href="#/writing" onClick={(e) => {e.preventDefault();go("writing");}}>Back to all writing.</a></p></div> :
+      <div className="reading-body"><p className="md-loading">Loading…</p></div> :
+
       <div className="reading-body">
         {w.body.map((p, i) => <p key={i} className="reveal">{p}</p>)}
-      </div>
+      </div>}
     </div>);
 
 }
