@@ -1,18 +1,48 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="David Y. Wang - Software Engineer & Designer. Building elegant, performant web experiences." />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50' y='66' font-family='Arial,sans-serif' font-size='36' font-weight='bold' fill='%23e30613' text-anchor='middle'>DYW</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>David Y. Wang</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en" data-theme="accent" data-layout="sidebar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>David Y. Wang — Portfolio</title>
+<meta name="description" content="David Y. Wang — engineer who sells. Tech sales, sales engineering, and solutions." />
+
+<!-- Fonts: editorial serif (Newsreader) + grotesque (Hanken Grotesk) + mono (IBM Plex Mono); alternates for the type tweak -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,400&family=Source+Serif+4:wght@400;500&family=Spectral:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+
+<!-- Flash-free bootstrap: set the saved/auto scheme + accent before paint -->
+<script>
+  (function(){
+    try{
+      var saved = localStorage.getItem("dyw-theme");
+      if(!saved){
+        saved = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "accent";
+      }
+      document.documentElement.setAttribute("data-theme", saved);
+      document.documentElement.style.setProperty("--accent-hue", "#1F8A5B");
+    }catch(e){
+      document.documentElement.style.setProperty("--accent-hue", "#1F8A5B");
+    }
+  })();
+</script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React + Babel (pinned) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Content (edit me!) -->
+  <script src="content.js"></script>
+
+  <!-- Tweaks shell, then page components, then the app -->
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="pages.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
 </html>
