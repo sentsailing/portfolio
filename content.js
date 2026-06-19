@@ -70,7 +70,7 @@ window.SITE = {
   writing: [
     {
       slug: "glicko-puzzles",
-      title: "Using ELO Systems as an Effective Problem Recommender for Education",
+      title: "Using ELO systems as problem recommenders",
       date: "2026-06-19",
       readingTime: "10 min",
       blurb: "I built GLICKGLICK, a math-practice site that serves each player the problem of ideal difficulty. The underlying foundation is a two-sided unsupervised rating system which acts as a self-calibrating recommender, in the sense that it learns problem difficulty and student skill simultaneously.",
@@ -78,7 +78,7 @@ window.SITE = {
     },
     {
       slug: "cookie-cats-retention-ab-test",
-      title: "When “Significant” Isn’t the Whole Story: An A/B Test on Mobile-Game Retention",
+      title: "An A/B test on mobile game retention",
       date: "2026-06-17",
       readingTime: "12 min",
       blurb: "A product-analytics walkthrough on Cookie Cats mobile app data.",
