@@ -15,11 +15,6 @@ const Icon = {
   arrow: (p) => <span aria-hidden="true" {...p}>→</span>
 };
 
-/* small util */
-function fmtDate(iso) {
-  try {return new Date(iso + "T00:00").toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });}
-  catch (e) {return iso;}
-}
 
 /* ---- Markdown posts ----------------------------------------------------- *
  * Long writeups live as writing/<slug>/index.md (+ images/). The parser and
@@ -178,7 +173,6 @@ function Reading({ slug, go }) {
   return (
     <div className="page page-anim reading">
       <a className="back" href="#/writing" onClick={(e) => {e.preventDefault();go("writing");}}>← Writing</a>
-      <div className="reading-meta reveal"><span>{fmtDate(w.date)}</span><span>{w.readingTime}</span></div>
       <h1 className="reveal">{w.title}</h1>
       {w.md ?
       mdState === "ready" ?
