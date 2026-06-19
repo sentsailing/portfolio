@@ -73,7 +73,7 @@ window.SITE = {
       title: "Using ELO Systems as an Effective Problem Recommender for Education",
       date: "2026-06-19",
       readingTime: "10 min",
-      blurb: "I built a math-practice app that rates both students and problems with one Glicko-2 system, turning recommendation into a two-sided rating problem. A full case study: the math, the engineering (built with Claude Code), what 5,697 attempts reveal about whether difficulty self-calibrates, and the brutal activation funnel behind a 1,279-signup launch.",
+      blurb: "I built GLICKGLICK, a math-practice site that serves each player the problem of ideal difficulty. The underlying foundation is a two-sided unsupervised rating system which acts as a self-calibrating recommender, in the sense that it learns problem difficulty and student skill simultaneously.",
       md: true
     },
     {
@@ -81,7 +81,7 @@ window.SITE = {
       title: "When “Significant” Isn’t the Whole Story: An A/B Test on Mobile-Game Retention",
       date: "2026-06-17",
       readingTime: "12 min",
-      blurb: "A product-analytics walkthrough of the Cookie Cats gate experiment — from exploratory data analysis to a ship/no-ship decision, including the segmentation twist that the headline number hides.",
+      blurb: "A product-analytics walkthrough on Cookie Cats mobile app data.",
       md: true
     }
   ],
