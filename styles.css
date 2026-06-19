@@ -437,8 +437,8 @@ img{ display:block; max-width:100%; }
 /* =========================================================================
    ENTRANCE REVEALS  +  PAGE TRANSITION
    ========================================================================= */
-/* Transition-based (degrades to visible if the render loop is paused). */
-.reveal{ opacity:0; transform:translateY(14px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+/* Scroll-reveal disabled: content is always visible (no fade/slide on scroll). */
+.reveal{ opacity:1; transform:none; }
 .reveal.in{ opacity:1; transform:none; }
 
 /* Gentle per-route entrance via transition, toggled by JS (.entered). */
