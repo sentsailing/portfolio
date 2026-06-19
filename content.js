@@ -69,6 +69,14 @@ window.SITE = {
    * entry below. That's it.                                                  */
   writing: [
     {
+      slug: "glicko-puzzles",
+      title: "Using ELO Systems as an Effective Problem Recommender for Education",
+      date: "2026-06-19",
+      readingTime: "10 min",
+      blurb: "I built a math-practice app that rates both students and problems with one Glicko-2 system, turning recommendation into a two-sided rating problem. A full case study: the math, the engineering (built with Claude Code), what 5,697 attempts reveal about whether difficulty self-calibrates, and the brutal activation funnel behind a 1,279-signup launch.",
+      md: true
+    },
+    {
       slug: "cookie-cats-retention-ab-test",
       title: "When “Significant” Isn’t the Whole Story: An A/B Test on Mobile-Game Retention",
       date: "2026-06-17",
