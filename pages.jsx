@@ -98,6 +98,7 @@ function About({ go }) {
         <div className="section-label reveal"><span>Bio</span><span className="sec-no">§1</span></div>
         <div className="prose">
           {S.bio.map((p, i) => <p key={i} className="reveal">{p}</p>)}
+          <p className="reveal"><a className="link" href="#/writing" onClick={(e) => {e.preventDefault();go("writing");}}>You can find my writing here.</a></p>
           {S.currently && <p className="reveal" style={{ color: "var(--ink-faint)", fontFamily: "var(--font-mono)", fontSize: 14 }}>Currently — {S.currently}</p>}
         </div>
       </section>
